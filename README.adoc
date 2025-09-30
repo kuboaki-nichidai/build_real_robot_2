@@ -1,0 +1,143 @@
+:linkcss:
+:stylesdir: css
+:stylesheet: mystyle.css
+:twoinches: width='360'
+:full-width: width='100%'
+:three-quarters-width: width='75%'
+:two-thirds-width: width='66%'
+:half-width: width='50%'
+:half-size:
+:one-thirds-width: width='33%'
+:one-quarters-width: width='25%'
+:thumbnail: width='60'
+:imagesdir: images
+:sourcesdir: codes
+:icons: font
+:hide-uri-scheme!:
+:figure-caption: 図
+:example-caption: リスト
+:table-caption: 表
+:appendix-caption: 付録
+:xrefstyle: short
+:section-refsig:
+:chapter-refsig:
+
+= 実機の組み立て
+
+演習では、LEGO社の Mindstorms EV3（ LEGO, Mindstorms, EV3 は LEGO社の商標です）のキットを使って製作したロボットを使います。
+
+
+[NOTE]
+--
+この演習は、グループで実施します。Assignmentは、進度や講義の都合で、グループか個人かを調整します。
+--
+== 【準備】演習に使うものを揃える
+
+. TAから、EV3のキットを受け取ってください。
+. 共有ドライブから、 `組立手順書.zip` を入手します。
+. 「オートライド組立手順書.pdf」を開きます。
+. （組み立てている間に）EV3本体とDCアダプターを接続して、バッテリーを充電しておきます。
+** 少なくとも緑ランプが点灯している状態になるまで。
+
+
+== 【演習】開発環境の環境構築
+
+実機を組み立てている間に、各人は下記サイトを参照して、各自のPCにEV3RTの環境設定をやります。
+
+WSL上でEV3RT（ev3rt-1.0以降、hrp3）を使う::  https://qiita.com/kuboaki/items/00ed6c993849d1061c1e
+
+.この記事を参照して作業をするときの注意点
+--
+* ev3rtは、1.1 がでています。 ダウンロードするときは、 `ev3rt-1.1-release.zip` をダウンロードしましょう。
+* まだhakoniwaのインストールをやっていないなら、WSL2のインストールをやってからこの作業にはいります。
+* micro SDカードを使う方法については、次のページを参照します。
+
+サンプルアプリケーションのビルドと実行:: https://dev.toppers.jp/trac_user/ev3pf/wiki/SampleProgram
+
+** PCでSDカードの読み書きが必要となるのはSDカードの初期化のときだけですが、もしグループの誰もSDカードが読み書きできないときは、TAに相談してください。
+** SDカードをEV3RT用に初期化する方法は、上記ページの「PCからEV3へのアプリケーションのロード方法の選択」に書いてあります（基本的には、sdcard/uImage をSDカードのルートディレクトリにコピーするだけ）。
+* この演習では、実機は「動的ローディング形式」を使います。
+** hakoniwa でシミュレーションするときは、「スタンドアローン形式」を使います。
+* PCからEV3へのアプリケーションのロード方法には、「SDカード＋USBケーブルによるアプリケーションのロード方法」を使います。
+** この方法では、PCとEV3をUSBケーブルで接続します。
+** 接続すると、PCからはUSBメモリのように見えますので、エクスプローラーでプログラムをコピーできます。
+** EV3からケーブルを外さないと、プログラムは動かせません。
+--
+
+== 【演習】実機を組み立てる
+
+. 「オートライド組立手順書.pdf」を開きます。
+. この手順書の中で指示されたそれぞれの組立手順書を使ってユニットを組み立てます。
+. 組み立てたユニットをドライブベースに組み込む「前の」写真を `images` ディレクトリにアップします。
+** アップするときは、下記のファイル名に合わせてアップしましす。
+. `git add ファイル名` を使って、アップしたファイルをリポジトリに追加します。
+. 各々の写真がこの文書に反映されたのを確認したら、コミットします。
+** コミットには、 `git commit ファイル名 -m コミットメッセージ` を使います。
+
+.完成したキューボイド
+image::cuboid.jpg[{half-width}]
+
+.完成したドライブベース
+image::drive_base.jpg[{full-width}]
+
+.超音波センサーユニット（側壁監視部）
+image::ultrasonic_sensor.jpg[{half-width}]
+
+.ホルダーアーム
+image::holder_arm.jpg[{full-width}]
+
+.カラーセンサーユニット（ライン監視部）
+image::color_sensor.jpg[{half-width}]
+
+.キャリア（座席）
+image::carrier.jpg[{half-width}]
+
+.バンパー
+image::bumper.jpg[{half-width}]
+
+
+== ロボットの全体の組立て
+
+. ドライブベースにそれぞれのユニットを装着します。
+** 超音波センサーユニットは、「側壁監視部取付手順書」に合わせて取り付けます。
+** バンパーは、「バンパー組立手順書」に合わせて取り付けます。
+
+組立てたロボットが、手順書の指示通りになっているか、確認します。
+
+.オートライドの完成状態（1）
+image::auto_transporter_and_units_01.png[{half-width}]
+
+.オートライドの完成状態（2）
+image::auto_transporter_and_units_02.png[{half-width}]
+
+
+== ロボットの完成
+
+. 組み立てた写真を `images` ディレクトリにアップします。
+** 写真がこの文書に反映されたのを確認したら、コミットします。
+. `git status` を使って、追加忘れ、コミット忘れがないか確認します。
+. `git push` を使って、リポジトリをpushします。
+. pushが成功したか、GitHubのリポジトリをみて確認します。
+
+.完成したロボット（オートライド）
+image::auto_ride.jpg[{full-width}]
+
+
+== 動作確認
+
+. 動作確認用のサンプルプログラムを入手して、ビルドします。
+** GoogleDriveの共有フォルダから、 `sample00.tar.gz`  をダウンロードします。
+** WSLのターミナルを開いて `tar xvf sample00.tar.gz` で展開します。
+** 展開してできた sample00 ディレクトリを workspace の中へ移動します。
+** workspace で `make app=sample00` でビルドを実行すると、 `app` ファイルができます。
+*** できあいの `sample00.app` ファイルが入っていても、ビルドし直してください。
+** `app` のファイル名を `sample00.app` に変えておきます。
+. 「ev3-cheat-sheet.pdf」をみて、電源のON/OFF方法、ファイルの転送方法を確認しておきます。
+. SDカードケースに入っていたら、そこからmicro SDカードを取り出します。
+. micro SDカードをEV3本体のカードスロットへ挿入します。
+. 真ん中のボタンを押して、電源をONします。
+. PCとUSBケーブルで接続します。
+. エクスプローラーで、PC上の workspace から `sample00.app` を選び、 SDカード（に見えているドライブ）の `\ev3rt\apps` の中にコピーします。
+. USBドライブの取り出しをやってから、ケーブルを外します。
+. EV3のメニューから「SD card」を選び、プログラムのリストから `sample00.app` を選んで実行します。
+** ２秒前進して２秒後退して停止したら、OKです。
